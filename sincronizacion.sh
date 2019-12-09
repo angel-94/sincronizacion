@@ -4,88 +4,113 @@
 ## ----------------------------------
 # Step #1: Define variables
 # ----------------------------------
-RED='\033[0;41;30m'
 STD='\033[0;0;39m'
+
+RED='\033[0;41;30m'
 PURPLE='\033[0;35m'
+GREEN='\033[0;32m'
+LIGHT_GREEN='\033[0;92m'
+
+BOLD='\e[1m'
+
+CONSUTAS=guac-consulCat
+ADMINISTRACION=guac-adminCat
+CARGAS=guac-cargasBatch
+EMAIL=guac-emailDispatch
+FRONT=guac-frontend
+
 
 # First validate if env variable exist
 if [[ -z "${MELTSAN_DIR}" ]]; then
-  echo -e "${PURPLE}Hay que definir la variable 'export MELTSAN_DIR=...'"
-  exit 1
+	echo -e "${PURPLE}Hay que definir la variable 'export MELTSAN_DIR=...'"
+	exit 1
 else
-  echo ""
+  	echo ""
 fi
 
 # First validate if env variable exist
 if [[ -z "${AMIS_DIR}" ]]; then
-  echo -e "${PURPLE}Hay que definir la variable 'export AMIS_DIR=...'"
-  exit 1
+	echo -e "${PURPLE}Hay que definir la variable 'export AMIS_DIR=...'"
+	exit 1
 else
-  echo ""
+  	echo ""
 fi
 
 
 # ----------------------------------
 # Step #2: User defined function
 # ----------------------------------
-pause(){
-    echo '*****************************************************************************************************'
+pause() {
+	print_line
     read -p "Press [Enter] key to continue..." fackEnterKey
 }
 
+print_asterisk() {
+	printf '*%.0s' {1..100} && printf '\n'
+}
 
-consultas(){
-    echo '*****************************************************************************************************'
-    echo "consultas called"
-    echo "*** Sincronización de consultas ***"
-    echo '*****************************************************************************************************'
-    export REPO_DIR=guac-consulCat
-    make update-mts-repo
-    make update-amis-repo
+print_line() {
+	printf '\n\n'
+}
+
+common_commands() {
+	print_asterisk
+	echo -e "${GREEN}*** Sincronización de ${PURPLE} ---${REPO_DIR}---${STD}${GREEN} ***"
+	echo -e "${GREEN}*** bajamos cambios del repo de meltsan ***${STD}"
+    print_asterisk
+    make update-mts-repo -s
+
+	print_line
+	print_asterisk
+	print_asterisk
+	echo -e "${GREEN}*** bajamos cambios del repo de amis ***${STD}"
+	print_asterisk
+	print_asterisk
+	print_line
+    
+	make update-amis-repo -s
     pause
 }
 
 
-# do something in two()
-administracion(){
-	echo '*****************************************************************************************************'
-    echo "administracion called"
-    echo "*** Sincronización de administracion ***"
-    echo '*****************************************************************************************************'
-    make mts-guac-admin
-    pause
+consultas() {
+	export REPO_DIR=${CONSUTAS}
+    common_commands
 }
 
 
 # do something in two()
-cargas(){
-	echo '*****************************************************************************************************'
-    echo "cargas called"
-    echo "*** Sincronización de cargas ***"
-    echo '*****************************************************************************************************'
-    make mts-guac-cargas
-    pause
+administracion() {
+	export REPO_DIR=${ADMINISTRACION}
+    common_commands
 }
 
 
 # do something in two()
-email(){
-	echo '*****************************************************************************************************'
-    echo "email called"
-    echo "*** Sincronización de email ***"
-    echo '*****************************************************************************************************'
-    make mts-guac-email
-    pause
+cargas() {
+	export REPO_DIR=${CARGAS}
+    common_commands
+}
+
+
+# do something in two()
+email() {
+	export REPO_DIR=${EMAIL}
+    common_commands
 }
 
 # do something in two()
-frontend(){
-	echo '*****************************************************************************************************'
-    echo "frontend called"
-    echo "*** Sincronización de frontend ***"
-    echo '*****************************************************************************************************'
-    make mts-guac-frontend
-    pause
+frontend() {
+	export REPO_DIR=${FRONT}
+    common_commands
+}
+
+execute_all() {
+	consultas
+	administracion
+	cargas
+	email
+	frontend
 }
 
 
@@ -100,7 +125,8 @@ show_menus() {
 	echo "3. Sincronización de guac-cargas"
     echo "4. Sincronización de guac-email"
     echo "5. Sincronización de guac-front"
-    echo "6. Salir"
+	echo "6. Sincronizar todo"
+    echo "7. Salir"
 }
 
 
@@ -110,17 +136,19 @@ show_menus() {
 # invoke the email() when the user select 3 from the menu option.
 # invoke the cargas() when the user select 4 from the menu option.
 # invoke the frontend() when the user select 5 from the menu option.
-# Exit when user the user select 6 form the menu option.
+# invoke the execute_all() when the user select 6 from the menu option.
+# Exit when user the user select 7 form the menu option.
 read_options(){
 	local choice
-	read -p "Enter choice [ 1 - 6] " choice
+	read -p "Choise an option between [1 - 7] " choice
 	case $choice in
 		1) consultas ;;
 		2) administracion ;;
 		3) cargas ;;
         4) email ;;
         5) frontend ;;
-        6) exit 0;;
+        6) execute_all ;;
+		7) exit 0;;
 		*) echo -e "${RED}Error opción no valida...${STD}" && sleep 2
 	esac
 }
