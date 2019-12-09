@@ -46,7 +46,7 @@ fi
 # ----------------------------------
 pause() {
 	print_line
-    read -p "Press [Enter] key to continue..." fackEnterKey
+	read -p "Press [Enter] key to continue..." fackEnterKey
 }
 
 
@@ -86,8 +86,8 @@ common_commands() {
 	print_asterisk
 	echo -e "${GREEN}*** Sincronización de ${STD}${BOLD} ---${REPO_DIR}---${STD}${GREEN} ***"
 	echo -e "${GREEN}*** bajamos cambios del repo de meltsan ***${STD}"
-    print_asterisk
-    make update-mts-repo -s
+	print_asterisk
+	make update-mts-repo -s
 
 	print_line
 	print_asterisk
@@ -96,50 +96,50 @@ common_commands() {
 	print_asterisk
 	print_asterisk
 	print_line
-    
+
 	make update-amis-repo -s
-	
+
 	delete_files_amis_repo
 	copy_mts_files_to_amis
 
 	print_final_message
 
-    pause
+	pause
 }
 
 
 # do something in two()
 consultas() {
 	export REPO_DIR=${CONSUTAS}
-    common_commands
+	common_commands
 }
 
 
 # do something in two()
 administracion() {
 	export REPO_DIR=${ADMINISTRACION}
-    common_commands
+	common_commands
 }
 
 
 # do something in two()
 cargas() {
 	export REPO_DIR=${CARGAS}
-    common_commands
+	common_commands
 }
 
 
 # do something in two()
 email() {
 	export REPO_DIR=${EMAIL}
-    common_commands
+	common_commands
 }
 
 
 # do something in two()
 frontend() {
 	export REPO_DIR=${FRONT}
-    common_commands
+	common_commands
 }
 
 
@@ -168,7 +168,7 @@ delete_files_amis_repo() {
 
 # do something in two()
 copy_mts_files_to_amis() {
-	
+
 	print_asterisk
 	echo -e "${BOLD}*** Ejecutamos el siguiente comando -> \n cp -rf ${MELTSAN_DIR}/${REPO_DIR}/* ${AMIS_DIR}/${REPO_DIR}${STD}"
 	print_asterisk
@@ -192,10 +192,10 @@ show_menus() {
 	echo "1. Sincronización de guac-consultas"
 	echo "2. Sincronización de guac-administración"
 	echo "3. Sincronización de guac-cargas"
-    echo "4. Sincronización de guac-email"
-    echo "5. Sincronización de guac-front"
+	echo "4. Sincronización de guac-email"
+	echo "5. Sincronización de guac-front"
 	echo "6. Sincronizar todo"
-    echo "7. Salir"
+	echo "7. Salir"
 }
 
 
@@ -214,9 +214,9 @@ read_options(){
 		1) consultas ;;
 		2) administracion ;;
 		3) cargas ;;
-        4) email ;;
-        5) frontend ;;
-        6) execute_all ;;
+		4) email ;;
+		5) frontend ;;
+		6) execute_all ;;
 		7) exit 0;;
 		*) echo -e "${RED}Error opción no valida...${STD}" && sleep 2
 	esac
