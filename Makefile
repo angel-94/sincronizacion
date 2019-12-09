@@ -1,15 +1,34 @@
-task:
-	@date
+COMMON = printf '*%.0s' {1..100} '\n'
 
-DIR = meltsan/guac-consulCat
-
-update-consulta: 
-	cd ${DIR}; \
+update-mts-repo: 
+	${COMMON}; \
+	cd ${MELTSAN_DIR}/${REPO_DIR}; \
 	git status; \
+	${COMMON}; \
+	git checkout istio
+	${COMMON}; \
 	git remote -v; \
+	${COMMON}; \
 	git pull origin istio; \
+	${COMMON}; \
 	git status; \
+	${COMMON}; \
 	git tag -n99 | cat
+	${COMMON}; \
 
-create-tag:
-	
+update-amis-repo: 
+	${COMMON}; \
+	cd ${MELTSAN_DIR}/${REPO_DIR}; \
+	git status; \
+	${COMMON}; \
+	git checkout istio
+	${COMMON}; \
+	git remote -v; \
+	${COMMON}; \
+	git pull origin istio; \
+	${COMMON}; \
+	git status; \
+	${COMMON}; \
+	git tag -n99 | cat
+	${COMMON}; \
+
