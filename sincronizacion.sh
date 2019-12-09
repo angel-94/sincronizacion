@@ -10,8 +10,7 @@ RED='\033[0;41;30m'
 PURPLE='\033[0;35m'
 GREEN='\033[0;32m'
 LIGHT_GREEN='\033[0;92m'
-
-BOLD='\e[1m'
+CYAN='\033[0;96m'
 
 CONSUTAS=guac-consulCat
 ADMINISTRACION=guac-adminCat
@@ -19,6 +18,11 @@ CARGAS=guac-cargasBatch
 EMAIL=guac-emailDispatch
 FRONT=guac-frontend
 
+BRANCH=istio
+
+BOLD=$(tput bold)
+
+# ~/git-meltsan.sh
 
 # First validate if env variable exist
 if [[ -z "${MELTSAN_DIR}" ]]; then
@@ -45,17 +49,42 @@ pause() {
     read -p "Press [Enter] key to continue..." fackEnterKey
 }
 
+
+# do something in two()
 print_asterisk() {
 	printf '*%.0s' {1..100} && printf '\n'
 }
 
+
+# do something in two()
 print_line() {
 	printf '\n\n'
 }
 
+
+# do something in two()
+print_final_message() {
+	echo -e "${CYAN}"
+	print_asterisk
+	echo -e "Ahora entrar al siguiente directorio:"
+	echo -e "${BOLD}${AMIS_DIR}/${REPO_DIR} ${STD}"
+	print_asterisk
+	echo -e "${CYAN}Ahora asegurate de seguir los siguientes pasos"
+	echo -e "1.- Valida los cambios efectuados"
+	echo -e "2.- Agrega los cambios al stage"
+	echo -e "1.- Crear el commit de los cambios"
+	echo -e "1.- Sube los cambios a la rama ${BRANCH}"
+	echo -e "1.- Crea el tag con el comando --- git tag -a guac-front-v0.0.22 -m 'MENSAJE' ---"
+	echo -e "1.- Has push del tag con el comando --- git push origin TAG"
+	print_asterisk
+	echo -e "${STD}"
+}
+
+
+# do something in two()
 common_commands() {
 	print_asterisk
-	echo -e "${GREEN}*** Sincronización de ${PURPLE} ---${REPO_DIR}---${STD}${GREEN} ***"
+	echo -e "${GREEN}*** Sincronización de ${STD}${BOLD} ---${REPO_DIR}---${STD}${GREEN} ***"
 	echo -e "${GREEN}*** bajamos cambios del repo de meltsan ***${STD}"
     print_asterisk
     make update-mts-repo -s
@@ -69,10 +98,17 @@ common_commands() {
 	print_line
     
 	make update-amis-repo -s
+	
+	delete_files_amis_repo
+	copy_mts_files_to_amis
+
+	print_final_message
+
     pause
 }
 
 
+# do something in two()
 consultas() {
 	export REPO_DIR=${CONSUTAS}
     common_commands
@@ -99,18 +135,51 @@ email() {
     common_commands
 }
 
+
 # do something in two()
 frontend() {
 	export REPO_DIR=${FRONT}
     common_commands
 }
 
+
+# do something in two()
 execute_all() {
 	consultas
 	administracion
 	cargas
 	email
 	frontend
+}
+
+
+# do something in two()
+delete_files_amis_repo() {
+	print_line
+	print_line
+	cd ${AMIS_DIR}/${REPO_DIR}
+	print_asterisk
+	echo -e "${BOLD}*** Borrar archivos del siguiete directorio ***${STD}"
+	pwd
+	print_asterisk
+	yes | rm -rf *
+}
+
+
+# do something in two()
+copy_mts_files_to_amis() {
+	
+	print_asterisk
+	echo -e "${BOLD}*** Ejecutamos el siguiente comando -> \n cp -rf ${MELTSAN_DIR}/${REPO_DIR}/* ${AMIS_DIR}/${REPO_DIR}${STD}"
+	print_asterisk
+
+	cp -rf ${MELTSAN_DIR}/${REPO_DIR}/* ${AMIS_DIR}/${REPO_DIR}
+
+	cd ${AMIS_DIR}/${REPO_DIR}
+	git status
+	print_asterisk
+	echo -e "${BOLD}*** Movemos todos los archivos al siguiente directorio ${AMIS_DIR}/${REPO_DIR}${STD}"
+	print_asterisk
 }
 
 
