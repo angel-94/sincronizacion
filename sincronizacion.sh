@@ -186,9 +186,9 @@ copy_mts_files_to_amis() {
 # function to display menus
 show_menus() {
 	clear
-	echo "~~~~~~~~~~~~~~~~~~~~~"	
+	echo "~~~~~~~~~~~~~~~~~~~~~~~~~"	
 	echo " SINCRONIZACION DE GUAC "
-	echo "~~~~~~~~~~~~~~~~~~~~~"
+	echo "~~~~~~~~~~~~~~~~~~~~~~~~~"
 	echo "1. Sincronización de guac-consultas"
 	echo "2. Sincronización de guac-administración"
 	echo "3. Sincronización de guac-cargas"
