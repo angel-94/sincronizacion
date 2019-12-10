@@ -40,6 +40,7 @@
 
 ---
 
-- Nota
-> 
-    Dar un git checkout src/environments/environment.prod.ts para que no se vayan los cambios del ambiente Meltsan al ambiente de la AMIS
+- Nota 
+```bash
+Dar un git checkout src/environments/environment.prod.ts para que no se vayan los cambios del ambiente Meltsan al ambiente de la AMIS
+```
