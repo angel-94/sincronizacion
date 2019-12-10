@@ -218,7 +218,7 @@ read_options(){
 		5) frontend ;;
 		6) execute_all ;;
 		7) exit 0;;
-		*) echo -e "${RED}Error opción no valida...${STD}" && sleep 2
+		*) echo -e "${RED}Error opción no valida...${STD}" && sleep 1
 	esac
 }
 

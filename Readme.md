@@ -35,7 +35,7 @@
     - Agrega los cambios al stage
     - Crear el commit de los cambios
     - Sube los cambios a la rama `istio`
-    - Crea el tag con el comando `git tag -a guac-front-v0.0.22 -m 'MENSAJE'`
+    - Crea el tag con el comando `git tag -a $TAG -m 'MENSAJE'`
     - Has push del tag con el comando `git push origin $TAG`
 
 ---
