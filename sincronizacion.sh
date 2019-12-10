@@ -40,6 +40,13 @@ else
   	echo ""
 fi
 
+# First validate if env variable exist
+if [[ -z "${SINCRONIZARION_DIR}" ]]; then
+	echo -e "${PURPLE}Hay que definir la variable 'export SINCRONIZARION_DIR=...'"
+	exit 1
+else
+  	echo ""
+fi
 
 # ----------------------------------
 # Step #2: User defined function
@@ -104,6 +111,7 @@ common_commands() {
 
 	print_final_message
 
+	cd ${SINCRONIZARION_DIR}
 	pause
 }
 
