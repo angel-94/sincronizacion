@@ -41,7 +41,7 @@ else
 fi
 
 # First validate if env variable exist
-if [[ -z "${SINCRONIZARION_DIR}" ]]; then
+if [[ -z "${SINCRONIZATION_DIR}" ]]; then
 	echo -e "${PURPLE}Hay que definir la variable 'export SINCRONIZARION_DIR=...'"
 	exit 1
 else
@@ -111,7 +111,7 @@ common_commands() {
 
 	print_final_message
 
-	cd ${SINCRONIZARION_DIR}
+	cd ${SINCRONIZATION_DIR}
 	pause
 }
 
