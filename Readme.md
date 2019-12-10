@@ -8,6 +8,7 @@
 ```bash
     export MELTSAN_DIR=
     export AMIS_DIR=
+    export SINCRONIZARION_DIR=
 ```
 
 1. Ejecutar el shell `sincronizacion.sh`
