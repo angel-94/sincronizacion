@@ -42,8 +42,8 @@ fi
 
 # First validate if env variable exist
 if [[ -z "${SINCRONIZATION_DIR}" ]]; then
-	echo -e "${PURPLE}Hay que definir la variable 'export SINCRONIZARION_DIR=...'"
-	exit 1
+	SINCRONIZATION_DIR=$(pwd)
+	echo -e "Se define la variable de ambiente SINCRONIZARION_DIR con valor = ${SINCRONIZATION_DIR}"
 else
   	echo ""
 fi
@@ -99,7 +99,7 @@ common_commands() {
 	print_line
 	print_asterisk
 	print_asterisk
-	echo -e "${GREEN}*** bajamos cambios del repo de amis ***${STD}"
+	echo -e "${GREEN}${BOLD}*** BAJAMOS CAMBIOS DEL REPO DE AMIS ***${STD}"
 	print_asterisk
 	print_asterisk
 	print_line
@@ -112,7 +112,7 @@ common_commands() {
 	print_final_message
 
 	cd ${SINCRONIZATION_DIR}
-	pause
+	# pause
 }
 
 
@@ -193,9 +193,9 @@ copy_mts_files_to_amis() {
 
 # function to display menus
 show_menus() {
-	clear
+	# clear
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~"	
-	echo " SINCRONIZACION DE GUAC "
+	echo -e "${BOLD} SINCRONIZACION DE GUAC ${STD}"
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~"
 	echo "1. Sincronización de guac-consultas"
 	echo "2. Sincronización de guac-administración"
