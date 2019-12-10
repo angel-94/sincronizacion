@@ -3,7 +3,7 @@
 ## ¿Qué necesitas?
 - GNU make
 
-## Prerequisitos
+## Prerrequisitos
 - Para la ejecución de la sincronización de los repositorios definir las siguentes variables de ambiente:
 ```bash
     export MELTSAN_DIR=
