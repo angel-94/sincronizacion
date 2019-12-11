@@ -1,6 +1,18 @@
-
-export GIT_USER=$1
-export GIT_PASSWORD=$2
+if [[ -n "$1" && -n "$2"]]; then
+    export GIT_USER=$1
+    export GIT_PASSWORD=$2
+else
+    echo "Para clonar los repos de guac de amis se necesita user y pass de un usuario como parametros."
+    echo "Ejemplo ./create-directories.sh user pass"
+    local desition
+    read -p "Deseas continuar [y,N]? " desition
+    if [[$desition == 'y']]
+        echo ""
+    else
+        exit 0 ;;
+    fi
+fi
+ 
 
 STD='\033[0;0;39m'
 PURPLE='\033[0;35m'
