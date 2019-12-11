@@ -10,6 +10,24 @@
     export AMIS_DIR=
 ```
 
+- Clonar los repositorios de Amis y Meltsan, para realizar este paso ejecutar el siguente comando `./create-directories.sh USER PASSWORD`, este comando crea los directorios de y clona los repositorios con los cuales se va a trabajar generando una estructora como la que se muetra a continuación:
+
+```bash
+├── guac
+│   ├── amis
+│   │   ├── guac-consulCat
+│   │   ├── guac-adminCat
+│   │   ├── guac-cargasBatch
+│   │   ├── guac-emailDispatch
+│   │   ├── guac-frontend
+│   ├── meltsan
+│   │   ├── guac-consulCat
+│   │   ├── guac-adminCat
+│   │   ├── guac-cargasBatch
+│   │   ├── guac-emailDispatch
+│   │   ├── guac-frontend
+```
+
 1. Ejecutar el shell `sincronizacion.sh`
 2. Se mostrará un menu con las opciónes disponibles de los repos a sincronizar, como el siguiente:
 ```js
