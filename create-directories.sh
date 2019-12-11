@@ -53,7 +53,7 @@ declare -a REPOS=(
 clone_repo_mts() {
     for repo in "${REPOS[@]}"
     do
-        if [ -d "$repo" ] 
+        if [ -d "$MELTSAN/$repo" ] 
         then
             echo "Repository $repo from $MELTSAN_COMPANY exists." 
         else
@@ -69,7 +69,7 @@ clone_repo_mts() {
 clone_repo_amis() {
     for repo in "${REPOS[@]}"
     do
-        if [ -d "$repo" ] 
+        if [ -d "$AMIS/$repo" ] 
         then
             echo "Repository $repo from $AMIS_COMPANY exists." 
         else
