@@ -1,15 +1,17 @@
-if [[ -n "$1" && -n "$2"]]; then
+if [[ -n "$1" && -n "$2" ]]
+then
     export GIT_USER=$1
     export GIT_PASSWORD=$2
 else
     echo "Para clonar los repos de guac de amis se necesita user y pass de un usuario como parametros."
     echo "Ejemplo ./create-directories.sh user pass"
-    local desition
     read -p "Deseas continuar [y,N]? " desition
-    if [[$desition == 'y']]
-        echo ""
+    if [[ $desition == "y" || $desition == "Y" ]]
+    then
+        echo "Continuamos..."
     else
-        exit 0 ;;
+        echo "Saliendo..."
+        exit 0 ;
     fi
 fi
  
