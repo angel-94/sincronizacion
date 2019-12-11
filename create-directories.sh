@@ -33,7 +33,12 @@ else
     mkdir -p ${AMIS}
 fi
 
-define_env_variables
+define_env_variables() {
+    PWD=$(pwd)
+    echo "La ruta actual es = $PWD"
+    MELTSAN_DIR=$PWD/$MELTSAN
+    AMIS_DIR=$PWD/$AMIS
+}
 
 
 declare -a REPOS=(
@@ -77,15 +82,9 @@ clone_repo_amis() {
 }
 
 
-define_env_variables() {
-    PWD=$(pwd)
-    echo "La ruta actual es = $PWD"
-    MELTSAN_DIR=$PWD/$MELTSAN
-    AMIS_DIR=$PWD/$AMIS
-}
-
-
+define_env_variables
 clone_repo_mts
+
 
 if [[ -z "${GIT_USER}" && -z "${GIT_PASSWORD}" ]]; then
 	echo -e "${PURPLE}No cuentas con usuario en el repositorio de la $AMIS_COMPANY ${STD}"
