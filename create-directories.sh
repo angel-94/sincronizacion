@@ -5,16 +5,16 @@ export GIT_PASSWORD=$2
 STD='\033[0;0;39m'
 PURPLE='\033[0;35m'
 
-export AMIS=/guac/amis
-export MELTSAN=/guac/meltsan
+export CURRENT_DIR=$(pwd)
+
+export AMIS=$CURRENT_DIR/guac/amis
+export MELTSAN=$CURRENT_DIR/guac/meltsan
 
 export URL_MELTSAN_GIT=https://github.com/meltsan
 export URL_AMIS_GIT=https://${GIT_USER}:${GIT_PASSWORD}@github.com/amis-dev
 
 export AMIS_COMPANY="AMIS"
 export MELTSAN_COMPANY="Meltsan"
-
-export CURRENT_DIR=$(pwd)
 
 
 if [ -d "${MELTSAN}" ] 
