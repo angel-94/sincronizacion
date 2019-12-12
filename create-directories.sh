@@ -1,10 +1,21 @@
+STD='\033[0;0;39m'
+PURPLE='\033[0;35m'
+BOLD=$(tput bold)
+
+# do something in two()
+print_asterisk() {
+	printf '*%.0s' {1..100} && printf '\n'
+}
+
+
 if [[ -n "$1" && -n "$2" ]]
 then
     export GIT_USER=$1
     export GIT_PASSWORD=$2
 else
-    echo "Para clonar los repos de guac de amis se necesita user y pass de un usuario como parametros."
-    echo "Ejemplo ./create-directories.sh user pass"
+    print_asterisk
+    echo "$BOLD Para clonar los repos de guac de amis se necesita user y pass de un usuario como parametros. $STD"
+    echo "Ejemplo $PURPLE./create-directories.sh user pass $STD"
     read -p "Deseas continuar [y,N]? " desition
     if [[ $desition == "y" || $desition == "Y" ]]
     then
@@ -14,13 +25,9 @@ else
         exit 0 ;
     fi
 fi
- 
 
-STD='\033[0;0;39m'
-PURPLE='\033[0;35m'
 
 export CURRENT_DIR=$(pwd)
-
 export AMIS=$CURRENT_DIR/guac/amis
 export MELTSAN=$CURRENT_DIR/guac/meltsan
 
@@ -49,7 +56,8 @@ fi
 
 define_env_variables() {
     PWD=$(pwd)
-    echo "La ruta actual es = $PWD"
+    print_asterisk
+    echo "-> La ruta actual es = $BOLD $PWD $STD"
     MELTSAN_DIR=$PWD/$MELTSAN
     AMIS_DIR=$PWD/$AMIS
 }
@@ -69,10 +77,12 @@ clone_repo_mts() {
     do
         if [ -d "$MELTSAN/$repo" ] 
         then
-            echo "Repository $repo from $MELTSAN_COMPANY exists." 
+            print_asterisk
+            echo "Repository $BOLD $repo $STD from $MELTSAN_COMPANY exists." 
         else
-            echo "Cloning $repo repository from $MELTSAN_COMPANY..."
+            print_asterisk
             cd $MELTSAN
+            echo "Cloning $BOLD $repo $STD repository from $MELTSAN_COMPANY..."
             git clone $URL_MELTSAN_GIT/$repo.git
             cd $CURRENT_DIR
         fi
@@ -85,10 +95,12 @@ clone_repo_amis() {
     do
         if [ -d "$AMIS/$repo" ] 
         then
-            echo "Repository $repo from $AMIS_COMPANY exists." 
+            print_asterisk
+            echo "Repository $BOLD $repo $STD from $AMIS_COMPANY exists." 
         else
+            print_asterisk
             cd $AMIS
-            echo "Cloning $repo repository from $AMIS_COMPANY..."
+            echo "Cloning $BOLD $repo $STD repository from $AMIS_COMPANY..."
             git clone $URL_AMIS_GIT/$repo.git
             cd $CURRENT_DIR
         fi
@@ -101,6 +113,7 @@ clone_repo_mts
 
 
 if [[ -z "${GIT_USER}" && -z "${GIT_PASSWORD}" ]]; then
+    print_asterisk
 	echo -e "${PURPLE}No cuentas con usuario en el repositorio de la $AMIS_COMPANY ${STD}"
 	exit 1
 else

@@ -11,6 +11,7 @@ PURPLE='\033[0;35m'
 GREEN='\033[0;32m'
 LIGHT_GREEN='\033[0;92m'
 CYAN='\033[0;96m'
+BOLD=$(tput bold)
 
 CONSUTAS=guac-consulCat
 ADMINISTRACION=guac-adminCat
@@ -19,8 +20,6 @@ EMAIL=guac-emailDispatch
 FRONT=guac-frontend
 
 BRANCH=istio
-
-BOLD=$(tput bold)
 
 # ~/git-meltsan.sh
 
