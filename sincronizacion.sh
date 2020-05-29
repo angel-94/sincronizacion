@@ -21,7 +21,7 @@ FRONT=guac-frontend
 
 BRANCH=istio
 
-~/git-meltsan.sh
+# ~/git-meltsan.sh
 
 # First validate if env variable exist
 if [[ -z "${MELTSAN_DIR}" ]]; then
